@@ -8,6 +8,10 @@
 </head>
 <body>
 <ul class="hmenu">
+  <% if user_signed_in? %>
+  <%= @user=current_user.nickname %>
+  <%= link_to "Meine Posts", posts_path %>
+  <% end %>
   <%= render 'devise/menu/registration_items' %>
   <%= render 'devise/menu/login_items' %>
 </ul>

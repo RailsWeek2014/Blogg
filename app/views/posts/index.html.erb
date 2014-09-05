@@ -2,8 +2,11 @@
 
 
     <% @posts.each do |post| %>
-    <%= @user.nickname %>
-      <h2><%= post.title %></h2>
+    <br />
+     <br />
+
+      <%= post.user.nickname %>
+      <h3><%= post.title %></h3>
         <%= post.content %>
        <%= link_to 'Show', post %>
         <%= link_to 'Edit', edit_post_path(post) %>

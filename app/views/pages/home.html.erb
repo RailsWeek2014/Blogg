@@ -1,0 +1,10 @@
+
+    <% @posts.each do |post| %>
+    <br />
+     <br />
+
+      <%= post.user.nickname %>
+      <h3><%= post.title %></h3>
+        <%= post.content %>
+         <% end %>
+
