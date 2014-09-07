@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Blogg</title>
+  <title><%= @title  || Blogg %> </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<ul class="hmenu">
-  <% if user_signed_in? %>
-  <%= @user=current_user.nickname %>
-  <%= link_to "Meine Posts", posts_path %>
-  <% end %>
-  <%= render 'devise/menu/registration_items' %>
-  <%= render 'devise/menu/login_items' %>
-</ul>
+ <header>   
+    <div class="ym-wrapper">        
+      <div class="ym-wbox">           
+        <h1>Project Name</h1>       
+      </div>    
+    </div>
+  </header>
+ 
+ <nav id="nav">   
+    <div class="ym-wrapper">        
+      <div class="ym-hlist">  
+       <ul class="hmenu">
+       <li><%=link_to "BLOGG", home_path %></li>
+        <% if user_signed_in? %>
+         <li><%= link_to current_user.nickname, posts_path %></li>
+         <li><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
+        <% end %>
+        <li><%= render 'devise/menu/login_items' %></li>
+        <li><%= render 'devise/menu/registration_items' %></li>
+       </ul>
+       </div>
+      </div>
+      </nav>
+
 
 <%= yield %>
 

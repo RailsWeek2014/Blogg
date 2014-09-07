@@ -6,9 +6,9 @@ class PostsController < ApplicationController
   def index
     @posts = current_user.posts
    
- 
-
   end
+
+
 
   # GET /posts/1
   # GET /posts/1.json
@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    
   end
 
   # POST /posts

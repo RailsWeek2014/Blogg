@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   skip_before_action :authenticate_user!, only: [:posts]
-  before_action :authenticate_user!
+    before_action :authenticate_user!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
