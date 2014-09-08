@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
-  get 'pages/home'
+  
 
+  resources :favorites
+
+  get 'pages/home'
+  get "test/index" => "test#index"
+  
   devise_for :users
-  resources :posts
-  resources :users
+  resources :users do
+    resources :posts
+  end
+  resources :favorites
+  get 'posts/user_posts'
 
   root to: "pages#home"
   get "home" => "pages#home"

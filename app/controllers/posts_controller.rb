@@ -4,8 +4,16 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = current_user.posts
-   
+  @posts = Post.where(user_id: params[:user_id])
+  @user =  Post.where(user_id: params[:user_id]).first.user.nickname
+     end
+
+
+  def user_posts
+  @posts=Post.all
+
+  @user_posts = User.find(5).posts
+
   end
 
 
