@@ -15,15 +15,14 @@
 <p>
   <%= @post.content %>
 </p>
-
-<% if current_user == @post.user %>
-<%= link_to 'Edit', edit_user_post_path(user_id: @post.user.id,  id: @post.id) %> |
-<%end%>
-
+<% if user_signed_in? %>
+  <% if current_user == @post.user %>
+  <%= link_to 'Edit', edit_user_post_path(user_id: @post.user.id,  id: @post.id) %> |
+  <%end%>
+<% end %>
 <%= link_to "#{@c} Comments",  user_post_comments_path(@post.user.id, @post.id) %>
-
+<%if user_signed_in? %>
 <%= link_to 'New Comment', new_user_post_comment_path(user_id: current_user, post_id: @post.id) %>
+<% end %>
 
 
-
-<%= link_to 'Back', :back %>

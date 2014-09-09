@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index, :show]
   # GET /comments
   # GET /comments.json
   def index
@@ -52,7 +53,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to user_post_comment_path(:user_id,:post_id,:content ), notice: 'Comment was successfully updated.' }
+        format.html { redirect_to user_post_comment_path(params[:user_id],params[:post_id],params[:id] ), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }

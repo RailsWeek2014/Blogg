@@ -10,10 +10,8 @@
         
         <td> <%= link_to Favorite.find(favorite.id).post.user.nickname, user_posts_path(p.user.id) %></td>
         <td><%= Favorite.find(favorite.id).post.title %></td>
-        <td><%= link_to 'Show', user_post_path(user_id: p.user.id, id: p.id ) %></td>
-     
-        
-        <td><%= link_to 'Destroy', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show post', user_post_path(user_id: p.user.id, id: p.id ) %> </td>         
+        <td>  &nbsp; | <%= link_to 'Destroy', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

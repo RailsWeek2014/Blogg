@@ -1,5 +1,6 @@
 class FavoritesController < ApplicationController
   before_action :set_favorite, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /favorites
   # GET /favorites.json
@@ -11,14 +12,16 @@ class FavoritesController < ApplicationController
 
  def list_favorites
    @favorites = Favorite.where(user_id: current_user.id)
+
     end
 
 
   # GET /favorites/1
   # GET /favorites/1.json
   def show
-    @post=Post.where(post_id: params[:post_id])
-  end
+    @post=Post.where(id: params[:post_id])
+    @user = post.user_id
+      end
 
   # GET /favorites/new
   
