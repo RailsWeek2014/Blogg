@@ -63,7 +63,7 @@ class FavoritesController < ApplicationController
   def destroy
     @favorite.destroy
     respond_to do |format|
-      format.html { redirect_to favorites_url, notice: 'Favorite was successfully destroyed.' }
+      format.html { redirect_to list_favorites_path, notice: 'Favorite was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
