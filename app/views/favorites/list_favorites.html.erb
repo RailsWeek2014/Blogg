@@ -1,0 +1,19 @@
+<h1>Listing favorites</h1>
+
+<table>
+  
+
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr>
+      
+        <td> <%= Favorite.find(favorite.id).post.user.nickname%></td>
+        <td><%= Favorite.find(favorite.id).post.title %></td>
+       
+        <td><%= link_to 'Destroy', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

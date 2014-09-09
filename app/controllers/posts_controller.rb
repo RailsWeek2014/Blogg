@@ -5,14 +5,14 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
   @posts = Post.where(user_id: params[:user_id])
-  @user =  Post.where(user_id: params[:user_id]).first.user.nickname
-     end
+  @user=@posts.first.user
+  @u=@posts.first.user.nickname
+
+       end
 
 
   def user_posts
-  @posts=Post.all
-
-  @user_posts = User.find(5).posts
+  
 
   end
 
@@ -22,9 +22,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
   
-  @user=current_user
-
-  end
+  @user=User.where(user_id: params[:user_id])
+  
+   end
 
   # GET /posts/new
   def new
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     @post.user_id=current_user.id
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to user_post_path(user_id: @post.user.id,  id: @post.id), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to user_post_path(user_id: @post.user.id,  id: @post.id), notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -70,8 +70,9 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post.destroy
+     @posts = Post.where(user_id: params[:user_id])
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to user_posts_path(@post.user.id), notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

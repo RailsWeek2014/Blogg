@@ -1,8 +1,8 @@
-@import '../../../yaml/sass/yaml-sass/core/base';
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
+ *   
  *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
@@ -12,8 +12,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+ *.
+ *
  */
 
 
@@ -27,3 +27,5 @@ ul.hmenu {
 ul.hmenu li {
   display: inline;  
 }
+
+/*import "./yaml/sass/yaml-sass/core/base";*/

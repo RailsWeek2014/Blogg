@@ -1,7 +1,8 @@
-<title><%=current_user.nickname %>s Blogg </title>
+<title> Blogg </title>
 
 
-<h1><%= @user%>s Blogg</h1>
+<h1><%= @u %>s Blogg</h1>
+  <%= link_to "show profile", user_path(@posts.first.user.id) %>
     
     <% @posts.each do |post| %>
     <br />
@@ -11,15 +12,19 @@
       
       <h3><%= post.title %></h3>
         <%= post.content %>
+        <br />
        <%= link_to 'Show', user_post_path(user_id: post.user.id,  id: post.id) %>
        <%= link_to 'Favorite', new_favorite_path %>
-        <%= link_to 'Edit', edit_user_post_path(user_id: post.user.id,  id: post.id) %>
+       <% if post.user.id == current_user.id %>
+        <%= link_to 'Edit', edit_user_post_path(post.user.id, post.id) %>
        <%= link_to 'Destroy', user_post_path(user_id: post.user.id,  id: post.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+       <%end%>
       <% end %>
 
 <br />
 <br />
 <br />
+<% if current_user == @user %>
 <%= link_to 'New Post', new_user_post_path %>
-
+<% end%>
 

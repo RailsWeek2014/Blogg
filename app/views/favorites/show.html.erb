@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @favorite.user %>
+   <%= link_to  @post.user.nickname, user_posts_path(@post.user.id)%>
+  <%=%>
 </p>
 
 <p>
-  <strong>Post:</strong>
-  <%= @favorite.post %>
+  <strong><%= @favorite.post.title %></strong>
+  <%= @favorite.post.content %>
 </p>
 
-<%= link_to 'Edit', edit_favorite_path(@favorite) %> |
+
 <%= link_to 'Back', favorites_path %>

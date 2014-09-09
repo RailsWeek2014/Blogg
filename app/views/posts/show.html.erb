@@ -4,8 +4,7 @@
 
 
 <p>
- <strong>Nickname:</strong>
- <%= @user.nickname %>
+ <%= link_to @post.user.nickname, user_posts_path(@post.user.id) %>
 </p>
 
 <p>
@@ -18,5 +17,7 @@
   <%= @post.content %>
 </p>
 
+<% if current_user == @post.user %>
 <%= link_to 'Edit', edit_user_post_path(user_id: @post.user.id,  id: @post.id) %> |
-<%= link_to 'Back', user_posts_path %>
+<%end%>
+<%= link_to 'Back', :back %>

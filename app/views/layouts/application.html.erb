@@ -22,7 +22,7 @@
        <li><%=link_to "BLOGG", home_path %></li>
         <% if user_signed_in? %>
          <li><%= link_to current_user.nickname, user_posts_path(current_user.id) %></li>
-         <li><%= link_to "Favorites", favorites_path %></li>
+         <li><%= link_to "Favorites", list_favorites_path %></li>
          <li><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
         <% end %>
         <li><%= render 'devise/menu/login_items' %></li>

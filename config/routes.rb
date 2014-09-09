@@ -1,17 +1,22 @@
 Rails.application.routes.draw do
   
 
+  resources :comments
+
   resources :favorites
 
   get 'pages/home'
-  get "test/index" => "test#index"
   
   devise_for :users
   resources :users do
-    resources :posts
+    resources :posts do
+      resources :favorites
+      resources :comments
+    end
   end
-  resources :favorites
-  get 'posts/user_posts'
+  
+  get "favorites/list_favorites" => "favorites#list_favorites"
+  get "list_favorites" => "favorites#list_favorites"
 
   root to: "pages#home"
   get "home" => "pages#home"
