@@ -1,19 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @comment.user %>
+  <%= link_to @comment.user.nickname, user_posts_path(@comment.user.id) %>
+ 
 </p>
 
 <p>
-  <strong>Post:</strong>
-  <%= @comment.post %>
+  <strong><%= @comment.post.title %></strong>
+  
 </p>
 
 <p>
-  <strong>Content:</strong>
-  <%= @comment.content %>
+  
+  <%= @comment.content %><br />
+  <%= @comment.created_at %><br />
 </p>
+<% if @comment.user == current_user %>
+<%= link_to 'Edit', edit_user_post_comment_path(user_id: @comment.post.user.id, post_id: @comment.post.id, id: @comment.id) %> |
+<% end %>
+<%= link_to 'All comments', user_post_comments_path(@comment.post.user.id, @comment.post.id) %>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>

@@ -5,15 +5,16 @@
   <%= link_to "show profile", user_path(@posts.first.user.id) %>
     
     <% @posts.each do |post| %>
-    <br />
+    
+      <% @c=Comment.where(post_id: post.id).count %>
      <br />
-      
-
+     <br />
       
       <h3><%= post.title %></h3>
         <%= post.content %>
         <br />
        <%= link_to 'Show', user_post_path(user_id: post.user.id,  id: post.id) %>
+       <%= link_to "#{@c} Comments",  user_post_comments_path(post.user.id, post.id) %>
        <%= link_to 'Favorite', new_favorite_path %>
        <% if post.user.id == current_user.id %>
         <%= link_to 'Edit', edit_user_post_path(post.user.id, post.id) %>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
   end
   
+  
   get "favorites/list_favorites" => "favorites#list_favorites"
   get "list_favorites" => "favorites#list_favorites"
 

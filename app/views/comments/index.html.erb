@@ -1,29 +1,30 @@
-<h1>Listing comments</h1>
 
+<h3> <%= @post.title %> </h3>
 <table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Post</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  
 
-  <tbody>
+  
     <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.user %></td>
-        <td><%= comment.post %></td>
-        <td><%= comment.content %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      
+
+        <%= link_to comment.user.nickname, user_posts_path(comment.user.id) %><br />
+        <%= comment.content %><br />
+        <%= comment.created_at %><br />
+        <%= link_to 'Show', user_post_comment_path(comment.post.user.id, comment.post.id, comment.id) %>
+        <% if comment.user == current_user %>
+         
+        | <%= link_to 'Edit', edit_user_post_comment_path(current_user.id, comment.post.id, comment.id) %>
+        | <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        <br />
+        <br />
     <% end %>
-  </tbody>
-</table>
+
+
+ <%= link_to 'Write new comment', new_user_post_comment_path(current_user, @post.id) %>
+ <br />
+
+<%= link_to 'Back', :back %>
 
 <br>
 
-<%= link_to 'New Comment', new_comment_path %>

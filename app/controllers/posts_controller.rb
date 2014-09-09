@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-  
+   @c=Comment.where(post_id: @post.id).count
   @user=User.where(user_id: params[:user_id])
   
    end

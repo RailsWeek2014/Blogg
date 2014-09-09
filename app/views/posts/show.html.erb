@@ -8,16 +8,22 @@
 </p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
+  <strong><%= @post.title %></strong>
+  
 </p>
 
 <p>
-  <strong>Content:</strong>
   <%= @post.content %>
 </p>
 
 <% if current_user == @post.user %>
 <%= link_to 'Edit', edit_user_post_path(user_id: @post.user.id,  id: @post.id) %> |
 <%end%>
+
+<%= link_to "#{@c} Comments",  user_post_comments_path(@post.user.id, @post.id) %>
+
+<%= link_to 'New Comment', new_user_post_comment_path(user_id: current_user, post_id: @post.id) %>
+
+
+
 <%= link_to 'Back', :back %>

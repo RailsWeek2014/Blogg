@@ -14,15 +14,17 @@
              <% @posts.each do |post| %>
              <br />
              <br />
-
+              <% @c=Comment.where(post_id: post.id).count %>
              <%= link_to post.user.nickname, user_posts_path(post.user.id)%>
 
              <h3><%= post.title %></h3>
              <%= post.content %>
                <br />
              <%= link_to 'Show', user_post_path(user_id: post.user.id, id: post.id) %>
+             <%= link_to "#{@c} Comments",  user_post_comments_path(post.user.id, post.id) %>
              <% if user_signed_in? %>
              <%= link_to 'Favorite',  new_user_post_favorite_path(current_user,post.id) %>
+
              <% end %>
              <% end %>
              </div>
