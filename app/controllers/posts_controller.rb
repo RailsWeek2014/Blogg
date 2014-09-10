@@ -12,8 +12,8 @@ skip_before_action :authenticate_user!, only: [:show, :index]
        end
 
 
-  def user_posts
-  
+  def search 
+    @posts= Post.where("tag like ?","%#{params[:search]}%")+Post.where("title like ?","%#{params[:search]}%")
 
   end
 
@@ -86,6 +86,6 @@ skip_before_action :authenticate_user!, only: [:show, :index]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, :tag, :privacy)
     end
 end

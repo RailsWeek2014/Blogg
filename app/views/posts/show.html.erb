@@ -7,22 +7,30 @@
  <%= link_to @post.user.nickname, user_posts_path(@post.user.id) %>
 </p>
 
-<p>
-  <strong><%= @post.title %></strong>
-  
-</p>
 
-<p>
+  <h3><%= @post.title %></h3>
+  
+
+
+
   <%= @post.content %>
-</p>
+
+<% if @post.tag != nil %>
+  <br />
+  <%= "#" %>
+  <% end %>
+        <%= @post.tag %> 
+<br />
 <% if user_signed_in? %>
   <% if current_user == @post.user %>
   <%= link_to 'Edit', edit_user_post_path(user_id: @post.user.id,  id: @post.id) %> |
+  <%= link_to 'Destroy', user_post_path(user_id: @post.user.id,  id: @post.id), method: :delete,
+           data: { confirm: 'Are you sure?' } %>
   <%end%>
 <% end %>
-<%= link_to "#{@c} Comments",  user_post_comments_path(@post.user.id, @post.id) %>
+|<%= link_to "#{@c} Comments",  user_post_comments_path(@post.user.id, @post.id) %>
 <%if user_signed_in? %>
-<%= link_to 'New Comment', new_user_post_comment_path(user_id: current_user, post_id: @post.id) %>
+|<%= link_to 'New Comment', new_user_post_comment_path(user_id: current_user, post_id: @post.id) %>
 <% end %>
 
 

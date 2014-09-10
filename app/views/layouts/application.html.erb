@@ -10,7 +10,7 @@
  <header>   
     <div class="ym-wrapper">        
       <div class="ym-wbox">           
-        <h1>Project Name</h1>       
+        <h1>BloG:Gates to another World</h1>       
       </div>    
     </div>
   </header>
@@ -25,8 +25,13 @@
          <li><%= link_to "Favorites", list_favorites_path %></li>
          <li><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
         <% end %>
-         <li><%= render 'devise/menu/registration_items' %></li>
+        <li><%= render 'devise/menu/registration_items' %></li>
        <li><%= render 'devise/menu/login_items' %></li>
+        <li><%= form_tag search_path, :method => 'get' do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :name => nil %>
+          <% end %></li>
+
        </ul>
        </div>
       </div>

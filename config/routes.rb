@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :favorites
 
+   get "posts/search" => "posts#search"
+
   get 'pages/home'
   
   devise_for :users
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
     end
   end
   
+  #get "posts/search" => "posts#search"
+  get "search" => "posts#search"
   
   get "favorites/list_favorites" => "favorites#list_favorites"
   get "list_favorites" => "favorites#list_favorites"

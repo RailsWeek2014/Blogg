@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Startseite </title>
-</head>
-
-<body>
-<main>	  
-    	    
-     					      
-        			        
-         			          
-            
-             <% @posts.each do |post| %>
+<% @posts.each do |post| %>
              <br />
              <br />
               <% @c=Comment.where(post_id: post.id).count %>
@@ -20,7 +7,7 @@
              <strong><%= post.title %></strong><br />
              <%= post.content %>
                
-               <% if post.tag != nil || post.tag != "" %>
+               <% if post.tag != nil %>
                <br />
                <%= "#" %>
                <% end %>
@@ -33,18 +20,3 @@
 
              <% end %>
              <% end %>
-            
-          
-       
-     </main>
-     <footer>
-     <div class="ym-wrapper">		    
-      <div class="ym-wbox">			
-      <br />      
-       <%=link_to "All users", users_path %></li>  
-         
-
-      </div>	 
-     </footer>
-    </body>
-</html>

@@ -3,17 +3,28 @@
 
 <h1><%= @u %>s Blogg</h1>
   <%= link_to "show profile", user_path(@posts.first.user.id) %>
-    
+   |
+    <% if user_signed_in? %>
+     <% if current_user == @user %>
+     <%= link_to 'New Post', new_user_post_path %>
+     <% end%>
+     <% end %>
+     <br />
     <% @posts.each do |post| %>
     
       <% @c=Comment.where(post_id: post.id).count %>
      <br />
-     <br />
-      
+     
       <h3><%= post.title %></h3>
         <%= post.content %>
+        
+        <% if post.tag != nil %>
         <br />
-       <%= link_to 'Show post', user_post_path(user_id: post.user.id,  id: post.id) %> 
+        <%= "#" %>
+        <% end %>
+        <%= post.tag %> 
+        <br />
+        <%= link_to 'Show post', user_post_path(user_id: post.user.id,  id: post.id) %> 
        |<%= link_to "#{@c} Comments",  user_post_comments_path(post.user.id, post.id) %>
        <% if user_signed_in? %>
          |<%= link_to 'Favorite', new_favorite_path %>
@@ -26,10 +37,4 @@
       <% end %>
 
 <br />
-<br />
-<br />
-<% if user_signed_in? %>
- <% if current_user == @user %>
- <%= link_to 'New Post', new_user_post_path %>
- <% end%>
-<% end %>
+
