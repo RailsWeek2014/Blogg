@@ -1,5 +1,5 @@
 
-<h3> <%= @post.title %> </h3>
+<h3>Comments to:  <%=  @post.title %> </h3>
 <table>
   
 
@@ -23,8 +23,8 @@
     <% end %>
 
 <% if user_signed_in? %>
- <%= link_to 'Write new comment', new_user_post_comment_path(current_user, @post.id) %>
- <br />
+ <p> Write new comment: </p>
+ <%= render 'form' %>
 <% end %>
 <%= link_to 'Back to post', user_post_path(@post.user.id,@post.id) %>
 

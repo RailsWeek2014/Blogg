@@ -14,6 +14,9 @@
              <% @posts.each do |post| %>
              <br />
              <br />
+             <% next if post.privacy == true && current_user != post.user %>
+
+
               <% @c=Comment.where(post_id: post.id).count %>
              <%= link_to post.user.nickname, user_posts_path(post.user.id)%><br />
 

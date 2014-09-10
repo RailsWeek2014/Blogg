@@ -42,6 +42,8 @@ skip_before_action :authenticate_user!, only: [:show, :index]
   def create
     @post = Post.new(post_params)
     @post.user_id=current_user.id
+    @picture=PictureUploader.new
+    picture.store!(File.open(params[:post][:picture].path))
     respond_to do |format|
       if @post.save
         format.html { redirect_to user_post_path(user_id: @post.user.id,  id: @post.id), notice: 'Post was successfully created.' }
@@ -86,6 +88,6 @@ skip_before_action :authenticate_user!, only: [:show, :index]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :tag, :privacy)
+      params.require(:post).permit(:title, :content, :tag, :privacy, :picture)
     end
 end
