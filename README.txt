@@ -35,7 +35,7 @@ Features:
 +Sichtbarkeit der Einträge
  -public
  -privat
- -für bestimmte User
+
 
 
 
