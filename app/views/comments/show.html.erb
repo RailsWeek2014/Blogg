@@ -18,6 +18,8 @@
 <% if user_signed_in? %>
   <% if @comment.user == current_user %>
   <%= link_to 'Edit', edit_user_post_comment_path(user_id: @comment.post.user.id, post_id: @comment.post.id, id: @comment.id) %> |
+  <%= link_to 'Destroy', user_post_comment_path(user_id: @comment.post.user.id,  post_id: @comment.post.id, id: @comment.id ), method: :delete,
+           data: { confirm: 'Are you sure?' } %>|
   <% end %>
 <%end%>
 <%= link_to 'All comments', user_post_comments_path(@comment.post.user.id, @comment.post.id) %>

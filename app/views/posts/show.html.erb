@@ -1,3 +1,7 @@
+ <%if @post.privacy == true && current_user!= @post.user %>
+ Private post, can't open it!
+
+<%else%>
 <title> <%= @post.title %> </title>
 
 <p id="notice"><%= notice %></p>
@@ -14,13 +18,17 @@
 
 
   <%= @post.content %>
-
-  <%= image_tag @post.picture_url %>
-
-<% if @post.tag != nil %>
+  
+  
+  <% if @post.picture_url != nil%>
   <br />
-  <%= "#" %>
-  <% end %>
+    <%= image_tag @post.picture_url %>
+  <%end%>
+
+<% if @post.tag != "" %>
+  <br />
+  #
+  <%end%>
         <%= @post.tag %> 
 <br />
 <% if user_signed_in? %>
@@ -32,7 +40,11 @@
 <% end %>
 |<%= link_to "#{@c} Comments",  user_post_comments_path(@post.user.id, @post.id) %>
 <%if user_signed_in? %>
-|<%= link_to 'New Comment',  user_post_comments_path(@post.user.id, @post.id) %>
+<% f=Favorite.where("user_id = ? AND post_id = ?", current_user, @post.id) %>
+ <% if f.empty? %>
+ |<%= link_to 'Favorite',  new_user_post_favorite_path(current_user,@post.id) %>
+ <% end %>
 <% end %>
 
+<%end%>
 

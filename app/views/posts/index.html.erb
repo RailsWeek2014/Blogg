@@ -2,7 +2,7 @@
 
 
 <h1><%= @u %>s Blogg</h1>
-  <%= link_to "show profile", user_path(@posts.first.user.id) %>
+  <%= link_to "show profile", user_path(@user) %>
    |
     <% if user_signed_in? %>
      <% if current_user == @user %>
@@ -11,30 +11,41 @@
      <% end %>
      <br />
     <% @posts.each do |post| %>
+     <% next if post.privacy == true && current_user != post.user %>
+
     
       <% @c=Comment.where(post_id: post.id).count %>
      <br />
      
       <h3><%= post.title %></h3>
+      <%= post.created_at %>
         <%= post.content %>
         
-        <% if post.tag != nil %>
+        <% if post.tag != "" %>
         <br />
-        <%= "#" %>
+        #
         <% end %>
         <%= post.tag %> 
         <br />
         <%= link_to 'Show post', user_post_path(user_id: post.user.id,  id: post.id) %> 
        |<%= link_to "#{@c} Comments",  user_post_comments_path(post.user.id, post.id) %>
        <% if user_signed_in? %>
-         |<%= link_to 'Favorite', new_favorite_path %>
+
+          <% f=Favorite.where("user_id = ? AND post_id = ?", current_user, post.id) %>
+             <% if f.empty? %>
+               |<%= link_to 'Favorite',  new_user_post_favorite_path(current_user,post.id) %>
+              <% end %>
          <% if post.user.id == current_user.id %>
          |<%= link_to 'Edit', edit_user_post_path(post.user.id, post.id) %>
-         |<%= link_to 'Destroy', user_post_path(user_id: post.user.id,  id: post.id), method: :delete,
+         |<%= link_to 'Delete', user_post_path(user_id: post.user.id,  id: post.id), method: :delete,
            data: { confirm: 'Are you sure?' } %>
            <%end%>
        <%end%>
       <% end %>
 
 <br />
+
+<div class="blog-footer">
+      <a href="javascript:scroll(0,0);">Back to top</a>   
+    </div>
 

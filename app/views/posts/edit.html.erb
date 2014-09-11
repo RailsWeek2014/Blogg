@@ -5,4 +5,4 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', [current_user, @post] %> |
-<%= link_to 'Back', :back %>
+<%= link_to 'Back to post', user_post_path(@post.user.id,@post.id) %>

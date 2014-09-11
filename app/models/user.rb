@@ -3,11 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
 validates :nickname, presence: true
 validates :email, presence: true
-validates :encrypted_üassword, presence: true
+validates :encrypted_password, presence: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-	has_many :posts
+	has_many :posts, dependent: :destroy
 
 end

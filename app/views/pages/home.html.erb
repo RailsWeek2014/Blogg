@@ -5,49 +5,52 @@
 </head>
 
 <body>
-<main>	  
-    	    
-     					      
-        			        
-         			          
+
+		<div class="row">
+        <div class="col-sm-8 blog-main">          
             
              <% @posts.each do |post| %>
-             <br />
-             <br />
              <% next if post.privacy == true && current_user != post.user %>
-
+             <br />
+             <br />             
 
               <% @c=Comment.where(post_id: post.id).count %>
-             <%= link_to post.user.nickname, user_posts_path(post.user.id)%><br />
+              <% f=Favorite.where("user_id = ? AND post_id = ?", current_user, post.id) %>
+                <div class="blog-post">
+                <h2 class="blog-post-title"><%= post.title %></h2>
+                <p class="blog-post-meta"><%= post.created_at %>, by <%= link_to post.user.nickname, user_posts_path(post.user.id)%><br /></p>
 
-             <strong><%= post.title %></strong><br />
+
+             <p>
              <%= post.content %>
-               
-               <% if post.tag != nil || post.tag != "" %>
-               <br />
-               <%= "#" %>
-               <% end %>
+              <% if post.tag != "" %> <br />
+                #
+                <%end%>
                <%= post.tag %> 
                <br />
              <%= link_to 'Show post', user_post_path(user_id: post.user.id, id: post.id) %>
              |<%= link_to "#{@c} Comments",  user_post_comments_path(post.user.id, post.id) %>
              <% if user_signed_in? %>
-             |<%= link_to 'Favorite',  new_user_post_favorite_path(current_user,post.id) %>
+              <% if f.empty? %>
+               |<%= link_to 'Favorite',  new_user_post_favorite_path(current_user,post.id) %>
+              <% end %>
+              <%end%>
+             </p>
 
-             <% end %>
-             <% end %>
-            
-          
-       
-     </main>
-     <footer>
-     <div class="ym-wrapper">		    
-      <div class="ym-wbox">			
-      <br />      
-       <%=link_to "All users", users_path %></li>  
-         
-
-      </div>	 
-     </footer>
+             </div>
+             <% end %> 
+     </div>
+     </div>
+     </div>
+     <br />
+     <br />
+     <%=link_to "All users", users_path %></li>
+    
     </body>
+
+   <div class="blog-footer">
+      <a href="javascript:scroll(0,0);">Back to top</a>   
+    </div>
+
+
 </html>

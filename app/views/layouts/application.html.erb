@@ -7,17 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
- <header>   
-    <div class="ym-wrapper">        
-      <div class="ym-wbox">           
-        <h1>BloG:Gates to another World</h1>       
+ <div class="blog-header">
+        <h1 class="blog-title">BloG:Gates to another World</h1>       
       </div>    
-    </div>
-  </header>
- 
- <nav id="nav">   
-    <div class="ym-wrapper">        
-      <div class="ym-hlist">  
+
+ <nav class="blog-nav">
+   
        <ul class="hmenu">
        <li><%=link_to "BLOGG", home_path %></li>
         <% if user_signed_in? %>
@@ -27,18 +22,18 @@
         <% end %>
         <li><%= render 'devise/menu/registration_items' %></li>
        <li><%= render 'devise/menu/login_items' %></li>
-        <li><%= form_tag search_path, :method => 'get' do %>
+        <li ><%= form_tag search_path, :method => 'get' do %>
           <%= text_field_tag :search, params[:search] %>
           <%= submit_tag "Search", :name => nil %>
           <% end %></li>
 
        </ul>
-       </div>
-      </div>
+       
       </nav>
 
 
 <%= yield %>
 
-</body>
+
+
 </html>

@@ -3,4 +3,6 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @comment %> |
+<%= link_to 'Destroy', user_post_comment_path(user_id: @comment.post.user.id,  post_id: @comment.post.id, id: @comment.id ), method: :delete,
+           data: { confirm: 'Are you sure?' } %>|
 <%= link_to 'Back', :back %>

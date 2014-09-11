@@ -5,8 +5,8 @@ gem 'binding_of_caller'
 gem 'byebug'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'carrierwave'
-
 gem 'autoprefixer-rails'
+gem 'tinymce-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

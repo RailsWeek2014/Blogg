@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to user_post_comments_path(params[:user_id], params[:post_id]), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -54,7 +54,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to user_post_comment_path(params[:user_id],params[:post_id],params[:id] ), notice: 'Comment was successfully updated.' }
+        format.html { redirect_to user_post_comments_path(params[:user_id],params[:post_id] ), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
@@ -67,8 +67,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to user_post_comment_path(:user_id,:post_id,:content ), notice: 'Comment was successfully destroyed.' }
+    respond_to do |format|          
+      format.html { redirect_to user_post_comments_path(@comment.post.user.id, @comment.post.id), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

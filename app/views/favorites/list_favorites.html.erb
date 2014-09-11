@@ -1,17 +1,19 @@
-<h1>Listing favorites</h1>
+<h1>Your favorites</h1>
 
 <table>
   
 
   <tbody>
     <% @favorites.each do |favorite| %>
-      <% p=favorite.post%>
+    
+     <% p=favorite.post%>
+     <% next if p.privacy == true && current_user != p.user %>
       <tr>
         
-        <td> <%= link_to Favorite.find(favorite.id).post.user.nickname, user_posts_path(p.user.id) %></td>
-        <td><%= Favorite.find(favorite.id).post.title %></td>
+        <td> <%= link_to Favorite.find(favorite.id).post.user.nickname, user_posts_path(p.user.id) %> &nbsp; </td>
+        <td><%= Favorite.find(favorite.id).post.title %>&nbsp;</td>
         <td><%= link_to 'Show post', user_post_path(user_id: p.user.id, id: p.id ) %> </td>         
-        <td>  &nbsp; | <%= link_to 'Destroy', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>  &nbsp; | <%= link_to 'Delete Favorite', favorite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

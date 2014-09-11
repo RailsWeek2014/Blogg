@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   
 
+  
   resources :comments
-
   resources :favorites
 
    get "posts/search" => "posts#search"

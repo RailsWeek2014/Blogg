@@ -5,9 +5,9 @@ skip_before_action :authenticate_user!, only: [:show, :index]
   # GET /posts
   # GET /posts.json
   def index
-  @posts = Post.where(user_id: params[:user_id])
-  @user=@posts.first.user
-  @u=@posts.first.user.nickname
+  @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
+  @user=User.find(params[:user_id])
+  @u=@user.nickname
 
        end
 
@@ -18,9 +18,10 @@ skip_before_action :authenticate_user!, only: [:show, :index]
   end
 
 
-
+  
   # GET /posts/1
   # GET /posts/1.json
+  # 
   def show
    @c=Comment.where(post_id: @post.id).count
   @user=User.where(user_id: params[:user_id])
@@ -43,7 +44,9 @@ skip_before_action :authenticate_user!, only: [:show, :index]
     @post = Post.new(post_params)
     @post.user_id=current_user.id
     @picture=PictureUploader.new
-    picture.store!(File.open(params[:post][:picture].path))
+    if params[:picture] != nil
+     picture.store!(File.open(params[:post][:picture].path))
+    end
     respond_to do |format|
       if @post.save
         format.html { redirect_to user_post_path(user_id: @post.user.id,  id: @post.id), notice: 'Post was successfully created.' }

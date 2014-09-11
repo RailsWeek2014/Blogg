@@ -11,20 +11,12 @@ class FavoritesController < ApplicationController
   end
 
  def list_favorites
-   @favorites = Favorite.where(user_id: current_user.id)
+   @favorites = Favorite.where(user_id: current_user.id).order(created_at: :desc)
 
     end
 
 
-  # GET /favorites/1
-  # GET /favorites/1.json
-  def show
-    @post=Post.where(id: params[:post_id])
-    @user = post.user_id
-      end
-
-  # GET /favorites/new
-  
+ 
 
   # GET /favorites/1/edit
   def edit
@@ -33,12 +25,11 @@ class FavoritesController < ApplicationController
   # POST /favorites
   # POST /favorites.json
   def new
-    @post=Post.where(post_id: params[:post_id])
     @favorite = Favorite.create(user_id: current_user.id, post_id: params[:post_id])
-    
+    @post=@favorite.post
     respond_to do |format|
       if @favorite.save
-        format.html { redirect_to @favorite, notice: 'Favorite was successfully created.' }
+        format.html { redirect_to user_post_path(@favorite.post.user_id, @favorite.post_id), notice: 'Favorite was successfully created.' }
         format.json { render :show, status: :created, location: @favorite }
       else
         format.html { render :new }
