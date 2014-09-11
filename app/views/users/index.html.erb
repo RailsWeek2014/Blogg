@@ -1,4 +1,4 @@
-<h1>Listing users</h1>
+<h1>All users</h1>
 
 <table>
   <thead>
@@ -12,7 +12,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.nickname %></td>
-        <td><%= link_to 'Show', user %></td>
+        <td> &nbsp; <%= link_to 'Show profile', user %></td>
         </tr>
     <% end %>
   </tbody>

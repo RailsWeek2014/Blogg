@@ -1,7 +1,7 @@
 <title> Blogg </title>
 
 
-<h1><%= @u %>s Blogg</h1>
+<h1><%= @u %>'s Blogg</h1>
   <%= link_to "show profile", user_path(@user) %>
    |
     <% if user_signed_in? %>
@@ -19,25 +19,29 @@
      
       <h3><%= post.title %></h3>
       <%= post.created_at %>
-        <%= post.content %>
+        <%= post.content.html_safe %>
         
         <% if post.tag != "" %>
-        <br />
-        #
+           <br />
+             # 
+           <% @tags=post.tag.split(",") %>
+           <% @tags.each do |tag| %>
+           <%= link_to "#{tag}", search_path(search: tag) %> &nbsp;
+             <%end%>
         <% end %>
-        <%= post.tag %> 
+         
         <br />
         <%= link_to 'Show post', user_post_path(user_id: post.user.id,  id: post.id) %> 
        |<%= link_to "#{@c} Comments",  user_post_comments_path(post.user.id, post.id) %>
        <% if user_signed_in? %>
 
-          <% f=Favorite.where("user_id = ? AND post_id = ?", current_user, post.id) %>
-             <% if f.empty? %>
+                <% f=Favorite.find("user_id = ? AND post_id = ?", current_user, post.id) %>
+              <% if f.empty? %>
                |<%= link_to 'Favorite',  new_user_post_favorite_path(current_user,post.id) %>
-              <% end %>
+              <%end%>
          <% if post.user.id == current_user.id %>
          |<%= link_to 'Edit', edit_user_post_path(post.user.id, post.id) %>
-         |<%= link_to 'Delete', user_post_path(user_id: post.user.id,  id: post.id), method: :delete,
+         |<%= link_to 'Delete post', user_post_path(user_id: post.user.id,  id: post.id), method: :delete,
            data: { confirm: 'Are you sure?' } %>
            <%end%>
        <%end%>

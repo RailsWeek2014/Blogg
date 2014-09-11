@@ -7,7 +7,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'carrierwave'
 gem 'autoprefixer-rails'
 gem 'tinymce-rails'
-
+gem 'tinymce-rails-imageupload', '~> 4.0.0.beta'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'

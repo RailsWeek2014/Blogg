@@ -12,7 +12,7 @@
 
 <p>
   
-  <%= @comment.content %><br />
+  <%= @comment.content.html_safe %><br />
   <%= @comment.created_at %><br />
 </p>
 <% if user_signed_in? %>

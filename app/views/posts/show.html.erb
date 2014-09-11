@@ -1,3 +1,4 @@
+<!DOCTYPE html>
  <%if @post.privacy == true && current_user!= @post.user %>
  Private post, can't open it!
 
@@ -17,7 +18,7 @@
 
 
 
-  <%= @post.content %>
+  <%= @post.content.html_safe %>
   
   
   <% if @post.picture_url != nil%>
@@ -34,7 +35,7 @@
 <% if user_signed_in? %>
   <% if current_user == @post.user %>
   <%= link_to 'Edit', edit_user_post_path(user_id: @post.user.id,  id: @post.id) %> |
-  <%= link_to 'Destroy', user_post_path(user_id: @post.user.id,  id: @post.id), method: :delete,
+  <%= link_to 'Delete post', user_post_path(user_id: @post.user.id,  id: @post.id), method: :delete,
            data: { confirm: 'Are you sure?' } %>
   <%end%>
 <% end %>
@@ -47,4 +48,6 @@
 <% end %>
 
 <%end%>
+
+</html>
 

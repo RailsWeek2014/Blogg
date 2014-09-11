@@ -11,7 +11,7 @@ No matching posts found
              <%= link_to post.user.nickname, user_posts_path(post.user.id)%><br />
 
              <strong><%= post.title %></strong><br />
-             <%= post.content %>
+             <%= post.content.html_safe %>
                
                <% if post.tag != nil %>
                <br />

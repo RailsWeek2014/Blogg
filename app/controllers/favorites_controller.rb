@@ -29,7 +29,7 @@ class FavoritesController < ApplicationController
     @post=@favorite.post
     respond_to do |format|
       if @favorite.save
-        format.html { redirect_to user_post_path(@favorite.post.user_id, @favorite.post_id), notice: 'Favorite was successfully created.' }
+        format.html { redirect_to list_favorites_path, notice: 'Favorite was successfully created.' }
         format.json { render :show, status: :created, location: @favorite }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class FavoritesController < ApplicationController
   def update
     respond_to do |format|
       if @favorite.update(favorite_params)
-        format.html { redirect_to @favorite, notice: 'Favorite was successfully updated.' }
+        format.html { redirect_to list_favorites_path, notice: 'Favorite was successfully updated.' }
         format.json { render :show, status: :ok, location: @favorite }
       else
         format.html { render :edit }
