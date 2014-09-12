@@ -18,7 +18,7 @@
     <%= f.text_field :title, :size=>"60" %>
   </div>
   <div class="field">
-  <%= tinymce %>
+  <%= tinymce  %>
     <%= f.label :content %><br>
     <%= f.text_area :content, :class => "tinymce", :escape => false %>
   </div>
@@ -31,8 +31,16 @@
   </div>
   <br />
   <div class="field">
+  
   <%= f.label "picture upload" %>
   <%= f.file_field :picture %>
+  <%= f.label "remove picture"%>
+  <%= f.check_box :remove_picture! %>
+  
+     
+
+
+    </label>
   
   <br />
     <%= f.radio_button(:privacy, true) %>

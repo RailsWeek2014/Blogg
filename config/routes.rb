@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
 
   
+
   resources :comments
   resources :favorites
 
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   
   devise_for :users
   resources :users do
+    resources :pictures
     resources :posts do
       resources :favorites
       resources :comments
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "home" => "pages#home"
 
+  
   
 
   # The priority is based upon order of creation: first created -> highest priority.

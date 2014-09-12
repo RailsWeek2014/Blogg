@@ -8,13 +8,10 @@
 <p id="notice"><%= notice %></p>
 
 
-<p>
- <%= link_to @post.user.nickname, user_posts_path(@post.user.id) %>
-</p>
-
-
-  <h3><%= @post.title %></h3>
-  
+   <div class="blog-post">
+     <h2 class="blog-post-title"><%= @post.title %></h2>
+     <p class="blog-post-meta"><%= @post.created_at %>, by <%= link_to @post.user.nickname, user_posts_path(@post.user.id)%></p>
+     
 
 
 
@@ -26,11 +23,15 @@
     <%= image_tag @post.picture_url %>
   <%end%>
 
-<% if @post.tag != "" %>
-  <br />
-  #
-  <%end%>
-        <%= @post.tag %> 
+   <% if @post.tag != "" %>
+           <br />
+             # 
+           <% @tags=@post.tag.split(",") %>
+           <% @tags.each do |tag| %>
+           <%= link_to "#{tag}", search_path(search: tag) %> &nbsp;
+             <%end%>
+        <% end %>
+       
 <br />
 <% if user_signed_in? %>
   <% if current_user == @post.user %>
@@ -46,7 +47,7 @@
  |<%= link_to 'Favorite',  new_user_post_favorite_path(current_user,@post.id) %>
  <% end %>
 <% end %>
-
+</div>
 <%end%>
 
 </html>
